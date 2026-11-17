@@ -1,0 +1,211 @@
+<header class="site-header">
+  <a class="brand" href="#home" (click)="closeMenu()" aria-label="Go to home">
+    <span class="brand-mark">A<span>.</span></span>
+    <span class="brand-name">PORTFOLIO<span class="brand-dot">/</span></span>
+  </a>
+
+  <button class="menu-toggle" type="button" (click)="menuOpen.set(!menuOpen())"
+          [attr.aria-expanded]="menuOpen()" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav class="nav-links" [class.open]="menuOpen()" aria-label="Main navigation">
+    <a href="#about" (click)="closeMenu()">About</a>
+    <a href="#projects" (click)="closeMenu()">Projects</a>
+    <a href="#expertise" (click)="closeMenu()">Expertise</a>
+    <a href="#journey" (click)="closeMenu()">Journey</a>
+    <a class="nav-contact" href="#contact" (click)="closeMenu()">Let's talk <span>↗</span></a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero section-shell" id="home">
+    <div class="hero-copy">
+      <div class="availability"><span class="status-dot"></span> SOFTWARE ENGINEERING · ARTIFICIAL INTELLIGENCE</div>
+      <p class="eyebrow">HELLO, I'M A SOFTWARE ENGINEER</p>
+      <h1>Building software.<br>Exploring <span class="gradient-text">intelligence.</span></h1>
+      <p class="hero-description">
+        I combine software engineering experience with AI research to explore
+        how intelligent systems can make software development better.
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#projects">Explore my work <span>↗</span></a>
+        <a class="button button-secondary" href="#contact">Get in touch</a>
+      </div>
+      <div class="hero-socials">
+        <a href="https://github.com/your-username" target="_blank" rel="noreferrer">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/yassine-abdeljalil-aa202385/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        <span>Based in France</span>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-label="Abstract AI and software engineering illustration">
+      <div class="visual-glow"></div>
+      <div class="orbit orbit-one"></div>
+      <div class="orbit orbit-two"></div>
+      <div class="orbit orbit-three"></div>
+      <div class="core-card">
+        <span class="core-symbol">✳</span>
+        <span class="core-label">IDEAS → SYSTEMS</span>
+        <span class="core-caption">Engineering with purpose</span>
+      </div>
+      <div class="float-chip chip-top"><span class="chip-dot purple"></span> LLMs & RAG</div>
+      <div class="float-chip chip-right"><span class="chip-dot blue"></span> SOFTWARE</div>
+      <div class="float-chip chip-bottom"><span class="chip-dot green"></span> RESEARCH</div>
+      <div class="visual-index">01 — 04</div>
+    </div>
+    <a class="scroll-cue" href="#about"><span></span> SCROLL TO EXPLORE</a>
+  </section>
+
+  <section class="intro-strip">
+    <div class="section-shell strip-inner">
+      <span>CURIOUS BY NATURE</span><i>✳</i><span>ENGINEER BY PRACTICE</span><i>✳</i><span>RESEARCHER BY PASSION</span>
+    </div>
+  </section>
+
+  <section class="section-shell content-section" id="about">
+    <div class="section-heading">
+      <p class="eyebrow">01 / ABOUT ME</p>
+      <h2>Engineering mindset.<br><span class="muted-heading">Research curiosity.</span></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-main">
+        <p class="lead">I am a software engineer with 7 years of experience and a PhD researcher working at the intersection of artificial intelligence and software engineering.</p>
+        <p>My work brings together hands-on software development and research on Large Language Models. I am particularly interested in retrieval-augmented generation, knowledge graphs, and the use of AI to support software modeling activities.</p>
+        <p>This website is where I share experiments, practical projects, research ideas and things I learn along the way.</p>
+      </div>
+      <aside class="about-note">
+        <span class="note-icon">✳</span>
+        <p class="eyebrow">MY CURRENT FOCUS</p>
+        <h3>Making AI useful for software engineering.</h3>
+        <p>From intelligent retrieval to model-aware reasoning and completion.</p>
+        <a href="#projects" class="text-link">See selected projects ↗</a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section-shell content-section projects-section" id="projects">
+    <div class="section-heading heading-row">
+      <div>
+        <p class="eyebrow">02 / SELECTED WORK</p>
+        <h2>Projects & <span class="muted-heading">experiments.</span></h2>
+      </div>
+      <p class="heading-aside">A selection of things I've built, explored<br>and learned from.</p>
+    </div>
+
+    <div class="filter-row" aria-label="Filter projects">
+      @for (filter of filters; track filter) {
+        <button type="button" class="filter-button" [class.active]="activeFilter() === filter"
+                (click)="setFilter(filter)">{{ filter }}</button>
+      }
+    </div>
+
+    <div class="project-grid">
+      @for (project of filteredProjects; track project.number) {
+        <article class="project-card" [class.featured]="project.featured">
+          <div class="project-topline">
+            <span class="project-number">{{ project.number }} / PROJECT</span>
+            <span class="project-arrow">↗</span>
+          </div>
+          <div class="project-art" [class.art-ai]="project.category === 'Generative AI'"
+               [class.art-model]="project.category === 'Model-Driven Engineering'"
+               [class.art-code]="project.category === 'Software Engineering'">
+            @if (project.category === 'Generative AI') {
+              <div class="node-map"><span></span><span></span><span></span><span></span><i></i></div>
+              <span class="art-label">RETRIEVAL / REASONING</span>
+            } @else if (project.category === 'Model-Driven Engineering') {
+              <div class="uml-box"><b>«model»</b><span>SoftwareModel</span><small>+ complete()</small></div>
+              <div class="uml-line"></div>
+              <div class="uml-box second"><b>«class»</b><span>Component</span><small>+ validate()</small></div>
+            } @else {
+              <div class="code-window"><div class="window-dots">● ● ●</div><code><span>class</span> Application &#123;<br>&nbsp; build() &#123; ... &#125;<br>&#125;</code></div>
+            }
+          </div>
+          <p class="project-category">{{ project.category }}</p>
+          <h3>{{ project.title }}</h3>
+          <p class="project-description">{{ project.description }}</p>
+          <div class="tag-list">
+            @for (tag of project.tags; track tag) { <span>{{ tag }}</span> }
+          </div>
+          <div class="project-links">
+            <a [href]="project.codeUrl" target="_blank" rel="noreferrer">Source code ↗</a>
+            @if (project.demoUrl) { <a [href]="project.demoUrl" target="_blank" rel="noreferrer">Live demo ↗</a> }
+          </div>
+        </article>
+      }
+    </div>
+    <p class="projects-footnote">Some entries are starter descriptions. Replace repository links and project details with your published work before launch.</p>
+  </section>
+
+  <section class="expertise-section" id="expertise">
+    <div class="section-shell content-section">
+      <div class="section-heading">
+        <p class="eyebrow">03 / TOOLKIT</p>
+        <h2>Technologies I <span class="muted-heading">work with.</span></h2>
+        <p class="section-subtitle">A practical mix of engineering foundations and emerging AI technologies.</p>
+      </div>
+      <div class="skills-grid">
+        @for (skillGroup of skills; track skillGroup.group) {
+          <article class="skill-card">
+            <span class="skill-index">/ {{ '0' + ($index + 1) }}</span>
+            <h3>{{ skillGroup.group }}</h3>
+            <div class="skill-tags">
+              @for (skill of skillGroup.items; track skill) { <span>{{ skill }}</span> }
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell content-section journey-section" id="journey">
+    <div class="section-heading">
+      <p class="eyebrow">04 / THE JOURNEY</p>
+      <h2>Experience & <span class="muted-heading">research.</span></h2>
+    </div>
+    <div class="timeline">
+      @for (item of experience; track item.title) {
+        <article class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-period">{{ item.period }}</div>
+          <div class="timeline-content">
+            <h3>{{ item.title }}</h3>
+            <p class="timeline-org">{{ item.organization }}</p>
+            <p>{{ item.description }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="research-banner">
+    <div class="section-shell research-inner">
+      <div>
+        <p class="eyebrow">BEYOND THE CODE</p>
+        <h2>Researching the next<br>generation of <span class="gradient-text">AI-assisted</span><br>software engineering.</h2>
+      </div>
+      <div class="research-copy">
+        <p>My research explores how LLMs can understand, generate and complete software models, and how retrieval strategies and structured knowledge can improve their results.</p>
+        <div class="research-topics"><span>LLM4MDE</span><span>MODEL COMPLETION</span><span>GRAPHRAG</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell contact-section" id="contact">
+    <p class="eyebrow">05 / GET IN TOUCH</p>
+    <h2>Have an interesting idea?<br><span class="muted-heading">Let's make it happen.</span></h2>
+    <p class="contact-description">I'm always interested in discussing software engineering, AI research, collaborations and new opportunities.</p>
+    <a class="button button-primary contact-button" href="mailto:yassine.abdeljalil91@gmail.com">yassine.abdeljalil91&#64;gmail.com <span>↗</span></a>
+    <div class="contact-socials">
+      <a href="https://www.linkedin.com/in/your-profile/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+      <a href="https://github.com/your-username" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="assets/cv.pdf" target="_blank" rel="noreferrer">Download CV ↓</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <a class="brand" href="#home"><span class="brand-mark">A<span>.</span></span><span class="brand-name">PORTFOLIO<span class="brand-dot">/</span></span></a>
+  <span>Designed & built with Angular.</span>
+  <span>© {{ 2026 }} · All rights reserved.</span>
+</footer>
